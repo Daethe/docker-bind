@@ -1,8 +1,0 @@
-./
-/var/log/webmin
-/usr/bin/perl
-10000
-USERNAME
-${WEBMIN_PASSWORD}
-${WEBMIN_PASSWORD}
-y

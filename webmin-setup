@@ -1,4 +1,4 @@
-./
+/etc/webmin
 /var/log/webmin
 /usr/bin/perl
 10000
