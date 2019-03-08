@@ -19,7 +19,7 @@ RUN wget http://prdownloads.sourceforge.net/webadmin/webmin-${WEBMIN_VERSION}.ta
 RUN gunzip webmin-${WEBMIN_VERSION}.tar.gz
 RUN tar xvf webmin-${WEBMIN_VERSION}.tar
 RUN mv webmin-${WEBMIN_VERSION} webmin
-RUN cat /tmp/webmin-setup | ./setup.sh
+RUN cat /tmp/webmin-setup | webmin/setup.sh
 RUN cat /tmp/webmin-services | tee /etc/init.d/webmin
 RUN chmod a+x /etc/init.d/webmin
 RUN rc-update add webmin
