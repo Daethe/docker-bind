@@ -9,19 +9,18 @@ ENV WEBMIN_VERSION=1.900
 ENV WEBMIN_USERNAME=admin
 ENV WEBMIN_PASSWORD=password
 
-RUN cd /data
-COPY webmin-setup /data/webmin-setup
-RUN sed -i -e "s/\${WEBMIN_USERNAME}/${WEBMIN_USERNAME}/g" /data/webmin-setup
-RUN sed -i -e "s/\${WEBMIN_PASSWORD}/${WEBMIN_PASSWORD}/g" /data/webmin-setup
-COPY webmin-services /data/webmin-services
+COPY webmin-setup /tmp/webmin-setup
+RUN sed -i -e "s/\${WEBMIN_USERNAME}/${WEBMIN_USERNAME}/g" /tmp/webmin-setup
+RUN sed -i -e "s/\${WEBMIN_PASSWORD}/${WEBMIN_PASSWORD}/g" /tmp/webmin-setup
+COPY webmin-services /tmp/webmin-services
 
 RUN apk add perl
 RUN wget http://prdownloads.sourceforge.net/webadmin/webmin-${WEBMIN_VERSION}.tar.gz
 RUN gunzip webmin-${WEBMIN_VERSION}.tar.gz
 RUN tar xvf webmin-${WEBMIN_VERSION}.tar
 RUN mv webmin-${WEBMIN_VERSION} webmin
-RUN cat /data/webmin-setup | ./setup.sh
-RUN cat /data/webmin-services | tee /etc/init.d/webmin
+RUN cat /tmp/webmin-setup | ./setup.sh
+RUN cat /tmp/webmin-services | tee /etc/init.d/webmin
 RUN chmod a+x /etc/init.d/webmin
 RUN rc-update add webmin
 RUN rc-service webmin start
