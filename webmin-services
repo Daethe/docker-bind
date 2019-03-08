@@ -1,0 +1,4 @@
+#!/sbin/openrc-run
+WEBMIN=/etc/rc.d/init.d/webmin
+start() { ${WEBMIN} start; }
+stop() { ${WEBMIN} start; }
